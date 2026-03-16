@@ -1,12 +1,11 @@
 import { useState } from 'react'
+
 import './App.css'
-import HomePage from "./HomePage.jsx"
 
 function App() {
-
   return (
-    <HomePage />
+    <AddEventPage />
   )
 }
 
-export default App
+export default AddEventPage
