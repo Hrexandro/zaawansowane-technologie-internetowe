@@ -1,11 +1,9 @@
 import { useState } from 'react'
 
-import './App.css'
 
-function App() {
-  return (
-    <AddEventPage />
-  )
+function AddEventPage() {
+  return <h1>Dodaj wydarzenie</h1>
 }
 
 export default AddEventPage
+

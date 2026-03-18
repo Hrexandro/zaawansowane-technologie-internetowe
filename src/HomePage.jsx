@@ -1,26 +1,19 @@
 import { useState } from 'react'
 import './App.css'
+import { Link } from 'react-router'
 
 function HomePage() {
-  function Button({ text, handleClick }) {
-    return <button onClick={handleClick}>{text}</button>;
-  }
 
-  const handleBackClick = () => {
-    window.location.href = "https://www.google.com";
-  };
-
-  const newEventClick = () => {
-    window.location.href = "https://www.google.com";
-  };
 
   return (
-    <>
+
         <div>
-          <Button text="Cofnij" handleClick={handleBackClick} />
-          <Button text="Nowe wydarzenie" handleClick={newEventClick}/>
+          <Link to="/add">Dodaj nowe wydarzenie</Link>
+          <br />
+          <Link to="/event/1">Zobacz wydarzenie 1</Link>
+          <h1>Lista wydarzeń</h1>
         </div>
-    </>
+
   )
 }
 
