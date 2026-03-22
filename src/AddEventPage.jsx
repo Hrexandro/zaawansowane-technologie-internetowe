@@ -1,12 +1,13 @@
 import { useState } from 'react'
+import { useNavigate } from "react-router";
 
-
-function AddEventPage() {
+function AddEventPage({ addEvent, events }) {
 
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [date, setDate] = useState('')
   const [errors, setErrors] = useState({})
+  const navigate = useNavigate()
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -36,12 +37,18 @@ function AddEventPage() {
 
     setErrors(newErrors)
     if (Object.keys(newErrors).length === 0) {
-      console.log({
-        name,
-        description,
+      const newEvent = {
+        id: Date.now(),
+        name: name.trim(),
+        description: description.trim(),
         date,
-      })
+      }
+
+      addEvent(newEvent)
+      navigate('/')
+
     }
+
     
   }
 
