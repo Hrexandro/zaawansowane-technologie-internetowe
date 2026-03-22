@@ -3,7 +3,14 @@ import './App.css'
 import { Link } from 'react-router'
 
 function HomePage() {
-
+  const [events, setEvents] = useState([
+    {
+      id: 1,
+      name: 'Koncert Quest Master',
+      description: 'Koncert Quest Master + Fief | Poznań \n Klub Pod Minogą, ul. Nowowiejskiego 8',
+      date: '2026-04-27',
+    },
+  ])
 
   return (
 
