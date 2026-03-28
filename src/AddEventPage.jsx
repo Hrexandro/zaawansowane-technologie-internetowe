@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from "react-router";
+import './App.css'
 
 function AddEventPage({ addEvent, events }) {
 
@@ -52,45 +53,93 @@ function AddEventPage({ addEvent, events }) {
     
   }
 
-  return <div>
-    <h1>Dodaj wydarzenie</h1>
+//   return <div>
+//     <h1>Dodaj wydarzenie</h1>
     
   
-    <form onSubmit={handleSubmit}>
-        <div>
+//     <form onSubmit={handleSubmit}>
+//         <div>
+//           <label htmlFor="name">Nazwa</label>
+//           <input
+//             id="name"
+//             type="text"
+//             value={name}
+//             onChange={(e) => setName(e.target.value)}
+//           />
+//           {errors.name && <p>{errors.name}</p>}
+//         </div>
+
+//         <div>
+//           <label htmlFor="description">Opis</label>
+//           <input
+//             id="description"
+//             type="text"
+//             value={description}
+//             onChange={(e) => setDescription(e.target.value)}
+//             />
+//             {errors.description && <p>{errors.description}</p>}
+//         </div>
+
+//         <label htmlFor="date">Data</label>
+//           <input
+//             id="date"
+//             type="date"
+//             value={date}
+//             onChange={(e) => setDate(e.target.value)}
+//             />
+//             {errors.date && <p>{errors.date}</p>}
+//         <button type="submit">Zapisz</button>
+//     </form>
+  
+//   </div>
+// }
+
+
+return (
+  <div className="page">
+    <div className="card">
+      <h1 className="title">Dodaj wydarzenie</h1>
+
+      <form onSubmit={handleSubmit} className="form">
+        <div className="form-group">
           <label htmlFor="name">Nazwa</label>
           <input
             id="name"
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={e => setName(e.target.value)}
           />
-          {errors.name && <p>{errors.name}</p>}
+          {errors.name && <p className="error">{errors.name}</p>}
         </div>
 
-        <div>
+        <div className="form-group">
           <label htmlFor="description">Opis</label>
-          <input
+          <textarea
             id="description"
-            type="text"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            />
-            {errors.description && <p>{errors.description}</p>}
+            onChange={e => setDescription(e.target.value)}
+          />
+          {errors.description && <p className="error">{errors.description}</p>}
         </div>
 
-        <label htmlFor="date">Data</label>
+        <div className="form-group">
+          <label htmlFor="date">Data</label>
           <input
             id="date"
             type="date"
             value={date}
-            onChange={(e) => setDate(e.target.value)}
-            />
-            {errors.date && <p>{errors.date}</p>}
-        <button type="submit">Zapisz</button>
-    </form>
-  
+            onChange={e => setDate(e.target.value)}
+          />
+          {errors.date && <p className="error">{errors.date}</p>}
+        </div>
+
+        <div className="actions">
+          <button type="submit" className="button">Zapisz</button>
+        </div>
+      </form>
+    </div>
   </div>
+)
 }
 
 export default AddEventPage

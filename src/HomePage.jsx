@@ -1,28 +1,33 @@
-import { useState } from 'react'
 import './App.css'
 import { Link } from 'react-router'
 
 function HomePage({ events }) {
-
-
   return (
+    <div className="page">
+      <div className="card">
+        <h1 className="title">Lista wydarzeń</h1>
 
-        <div>
-          <Link to="/add">Dodaj nowe wydarzenie</Link>
-          <br />
-          {events.length === 0 ? (
-        <p>Brak wydarzeń</p>
-      ) : (
-        <ul>
-          {events.map(event => (
-            <li key={event.id}>
-              <Link to={`/event/${event.id}`}><strong>{event.name}</strong></Link> — {event.date}
-            </li>
-          ))}
-        </ul>
-      )}
-        </div>
+        <Link to="/add" className="button">
+          Dodaj nowe wydarzenie
+        </Link>
 
+        {events.length === 0 ? (
+          <p className="info-text">Brak wydarzeń</p>
+        ) : (
+          <ul className="event-list">
+            {events.map(event => (
+              <li key={event.id} className="event-item">
+                <h2 className="event-name">{event.name}</h2>
+                <p className="event-date">{event.date}</p>
+                <Link to={`/event/${event.id}`} className="button-secondary">
+                  Szczegóły
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
   )
 }
 
