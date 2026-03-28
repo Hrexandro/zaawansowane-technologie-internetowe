@@ -1,22 +1,49 @@
-import { useState } from 'react'
 import './App.css'
 import { Routes, Route } from 'react-router'
 import HomePage from './HomePage.jsx'
 import EventDetailsPage from './EventDetailsPage.jsx'
 import AddEventPage from './AddEventPage.jsx'
+import { useEffect, useState } from 'react'
 
 function App() {
-  const [events, setEvents] = useState([
-    {
-      id: 1,
-      name: 'Koncert Quest Master',
-      description: 'Koncert Quest Master + Fief | Poznań \n Klub Pod Minogą, ul. Nowowiejskiego 8',
-      date: '2026-04-27',
-    },
-  ])
+  const [events, setEvents] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    async function loadEvents() {
+      try {
+        setLoading(true)
+        setError('')
+
+        const response = await fetch('/events.json')
+
+        if (!response.ok) {
+          throw new Error('Błąd pobierania danych')
+        }
+
+        const data = await response.json()
+        setEvents(data)
+      } catch (err) {
+        setError('Pobieranie danych zakończone niepowodzeniem')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadEvents()
+  }, [])
 
   function addEvent(newEvent) {
     setEvents(prevEvents => [...prevEvents, newEvent])
+  }
+
+  if (loading) {
+    return <p>Ładowanie danych...</p>
+  }
+
+  if (error) {
+    return <p>{error}</p>
   }
 
   return (

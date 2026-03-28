@@ -7,8 +7,12 @@ function EventDetailsPage({ events }) {
   const { id } = useParams()
   const event = events.find(e => e.id === Number(id))
 
-  if (!event) return <p>Nie znaleziono wydarzenia</p>
-
+  if (!event) return (
+    <>
+      <p>Nie znaleziono wydarzenia</p>
+      <Link to="/">Powrót</Link>
+    </>
+  )
   return (
     <div>
       <h1>{event.name}</h1>
