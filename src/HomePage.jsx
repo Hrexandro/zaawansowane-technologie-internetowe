@@ -16,7 +16,7 @@ function HomePage({ events }) {
         <ul>
           {events.map(event => (
             <li key={event.id}>
-              <strong>{event.name}</strong> — {event.date}
+              <Link to={`/event/${event.id}`}><strong>{event.name}</strong></Link> — {event.date}
             </li>
           ))}
         </ul>

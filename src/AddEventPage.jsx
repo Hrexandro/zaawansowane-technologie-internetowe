@@ -31,7 +31,7 @@ function AddEventPage({ addEvent, events }) {
       const today = new Date()
     
       if (selectedDate < today) {
-        newErrors.date = 'Data nie może być przeszła'
+        newErrors.date = 'Data musi przypadać w przyszłości'
       }
     }
 

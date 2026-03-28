@@ -1,26 +1,28 @@
 import { useState } from 'react'
 import './App.css'
 import { useParams } from 'react-router'
+import { Link } from 'react-router'
 
-
-
-function EventDetailsPage() {
+function EventDetailsPage({ events }) {
   const { id } = useParams()
-  
-  const event = events.find(e => e.id === id);
+  const event = events.find(e => e.id === Number(id))
 
-  if (!event) return <p>Nie znaleziono wydarzenia</p>;
-
-  return <h1>{event.title}</h1>;
+  if (!event) return <p>Nie znaleziono wydarzenia</p>
 
   return (
     <div>
-      <h1>Szczegóły wydarzenia</h1>
-      <p>ID wydarzenia: {id}</p>
+      <h1>{event.name}</h1>
+      <p>{event.description}</p>
+      <p>{event.date}</p>
+      <Link to="/">Powrót</Link>
     </div>
-
-    
   )
 }
-
 export default EventDetailsPage
+
+
+
+
+
+
+
