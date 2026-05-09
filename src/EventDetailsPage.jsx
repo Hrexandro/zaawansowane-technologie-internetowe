@@ -1,16 +1,27 @@
 import './App.css'
-import { useParams, Link } from 'react-router'
+import { useParams, Link, useNavigate } from 'react-router'
 
-function EventDetailsPage({ events }) {
+function EventDetailsPage({ events, deleteEvent }) {
   const { id } = useParams()
+  const navigate = useNavigate()
+
   const event = events.find(e => e.id === Number(id))
+
+  async function handleDelete() {
+    try {
+      await deleteEvent(event.id)
+      navigate('/')
+    } catch (err) {
+      alert('Nie udało się usunąć wydarzenia')
+    }
+  }
 
   if (!event) {
     return (
       <div className="page">
         <div className="card">
-          <h1 className="title">Nie znaleziono wydarzenia</h1>
-          <Link to="/" className="button-secondary">Powrót</Link>
+          <h1>Nie znaleziono wydarzenia</h1>
+          <Link to="/">Powrót</Link>
         </div>
       </div>
     )
@@ -19,12 +30,18 @@ function EventDetailsPage({ events }) {
   return (
     <div className="page">
       <div className="card">
-        <h1 className="title">{event.name}</h1>
-        <p className="details-text">{event.description}</p>
-        <p className="event-date">{event.date}</p>
+        <h1>{event.name}</h1>
+        <p>{event.description}</p>
+        <p>{event.date}</p>
 
         <div className="actions">
-          <Link to="/" className="button-secondary">Powrót</Link>
+          <Link to="/" className="button">
+            Powrót
+          </Link>
+
+          <button onClick={handleDelete} className="button">
+            Usuń wydarzenie
+          </button>
         </div>
       </div>
     </div>
