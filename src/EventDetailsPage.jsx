@@ -1,7 +1,7 @@
 import './App.css'
 import { useParams, Link, useNavigate } from 'react-router'
 
-function EventDetailsPage({ events, deleteEvent }) {
+function EventDetailsPage({ events, deleteEvent, user }) {
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -21,7 +21,9 @@ function EventDetailsPage({ events, deleteEvent }) {
       <div className="page">
         <div className="card">
           <h1>Nie znaleziono wydarzenia</h1>
-          <Link to="/">Powrót</Link>
+          <Link to="/" className="button">
+            Powrót
+          </Link>
         </div>
       </div>
     )
@@ -39,9 +41,11 @@ function EventDetailsPage({ events, deleteEvent }) {
             Powrót
           </Link>
 
-          <button onClick={handleDelete} className="button">
-            Usuń wydarzenie
-          </button>
+          {user.role === 'ADMIN' && (
+            <button onClick={handleDelete} className="button">
+              Usuń wydarzenie
+            </button>
+          )}
         </div>
       </div>
     </div>

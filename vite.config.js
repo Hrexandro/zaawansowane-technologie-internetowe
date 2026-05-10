@@ -5,7 +5,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/items': 'http://localhost:3000'
+      '/items': 'http://localhost:3000',
+      '/register': 'http://localhost:3000',
+      '/login': 'http://localhost:3000'
     }
   }
 })

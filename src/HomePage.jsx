@@ -1,30 +1,41 @@
 import './App.css'
 import { Link } from 'react-router'
 
-function HomePage({ events }) {
+function HomePage({ events, user, logout }) {
   return (
     <div className="page">
       <div className="card">
-        <h1 className="title">Lista wydarzeń</h1>
+        <h1>Lista wydarzeń</h1>
 
-        <Link to="/add" className="button">
-          Dodaj nowe wydarzenie
-        </Link>
+        <p>Zalogowano jako: {user.email}</p>
+        <p>Rola: {user.role}</p>
+
+        <div className="actions">
+          {user.role === 'ADMIN' && (
+            <Link to="/add" className="button">
+              Dodaj nowe wydarzenie
+            </Link>
+          )}
+
+          <button onClick={logout} className="button">
+            Wyloguj
+          </button>
+        </div>
 
         {events.length === 0 ? (
-          <p className="info-text">Brak wydarzeń</p>
+          <p>Brak wydarzeń</p>
         ) : (
-          <ul className="event-list">
+          <div className="event-list">
             {events.map(event => (
-              <li key={event.id} className="event-item">
-                <h2 className="event-name">{event.name}</h2>
-                <p className="event-date">{event.date}</p>
-                <Link to={`/event/${event.id}`} className="button-secondary">
+              <div key={event.id} className="event-card">
+                <h2>{event.name}</h2>
+                <p>{event.date}</p>
+                <Link to={`/event/${event.id}`} className="button">
                   Szczegóły
                 </Link>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
     </div>
